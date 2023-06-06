@@ -2,18 +2,18 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const navItem = <div className='lg:flex items-center text-base font-semibold'>
-        <li><Link to={'/'}>Home</Link></li>
-        <li><Link>Our Service</Link></li>
-        <li><Link to={'/dashboard'}>Dashboard</Link></li>
-        <li><Link>Contact Us</Link></li>
+    const navItem = <div className='lg:flex items-center text-white '>
+        <li><Link to={'/'} className='text-xl font-mono'>Home</Link></li>
+        <li><Link className='text-xl font-mono'>Our Service</Link></li>
+        <li><Link to={'/dashboard'} className='text-xl font-mono'>Dashboard</Link></li>
+        <li><Link className='text-xl font-mono'>Contact Us</Link></li>
         <div className='md:ms-2'>
-            <Link to={'/login'}><button className="btn bg-[#F73E7B]">Login</button></Link>
+            <Link to={'/login'}><button className="btn bg-[#F73E7B] border-0 text-white text-base">Login</button></Link>
         </div>
     </div>
 
     return (
-        <div className="navbar bg-base-100 web-font">
+        <div className="navbar fixed z-10 opacity-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -23,7 +23,7 @@ const Navbar = () => {
                         {navItem}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl"><span className='text-4xl font-bold'>MARTIAL</span><span className='text-[#F73E7B] text-2xl'>verse</span></a>
+                <a className="btn btn-ghost normal-case text-xl"><span className='text-4xl font-bold text-white'>MARTIAL</span><span className='text-[#F73E7B] text-2xl'>verse</span></a>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
