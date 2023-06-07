@@ -4,7 +4,7 @@ import { HiMail } from 'react-icons/hi';
 
 const Footer = () => {
     return (
-        <footer className=" py-8 bg-neutral text-neutral-content px-4">
+        <footer className=" py-14 bg-neutral text-neutral-content px-4">
             <div className="flex justify-evenly flex-col md:flex-row max-w-screen-xl mx-auto">
                 <div>
                     <p><span className='text-4xl font-bold text-white'>MARTIAL</span><span className='text-lime-500 text-2xl'> verse</span></p>

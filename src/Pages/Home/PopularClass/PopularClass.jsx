@@ -15,12 +15,13 @@ const PopularClass = () => {
     })
 
     return (
-        <div className=" bg-fixed pt- z-20 featured-background ">
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt- text-white py-10 px-4 md:py-12 md:px-20 lg:py-32 lg:px-64">
+        <div className=" bg-fixed pt- z-20 featured-background">
+            <h1 className='text-center text-white text-7xl py-16 font-bold'>Our classes</h1>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt- text-white pb-10 px-4 md:pb-12 md:px-20 lg:pb-32 lg:px-64">
                 {
-                    services.slice(6).map(service => <ShowPopularClass
-                       key={service._id}
-                       service={service}
+                    services.slice(0,6).map(service => <ShowPopularClass
+                        key={service._id}
+                        service={service}
                     ></ShowPopularClass>)
                 }
             </div>

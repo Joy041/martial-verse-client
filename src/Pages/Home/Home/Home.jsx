@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Instructor from "../Instructor/Instructor";
 import PopularClass from "../PopularClass/PopularClass";
 
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div className="bg-slate-400">
             <Banner></Banner>
             <PopularClass></PopularClass>
+            <Instructor></Instructor>
         </div>
     );
 };
