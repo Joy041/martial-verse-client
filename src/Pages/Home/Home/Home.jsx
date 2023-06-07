@@ -4,7 +4,7 @@ import PopularClass from "../PopularClass/PopularClass";
 
 const Home = () => {
     return (
-        <div>
+        <div className="bg-slate-400">
             <Banner></Banner>
             <PopularClass></PopularClass>
         </div>
