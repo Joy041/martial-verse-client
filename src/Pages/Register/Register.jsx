@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
+import axios from "axios";
 
 
 const Register = () => {
@@ -30,16 +31,18 @@ const Register = () => {
                 console.log(loggedUser)
                 userVerification(loggedUser)
                 updateUserProfile(loggedUser, name, photo)
-                .then(result => {
-                    console.log(result)
-                    reset()
-                    navigate('/')
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Register successful',
-                        icon: 'success',
-                        confirmButtonText: 'Cool'
-                    })
+                .then(() => {
+                    axios.post('https://martial-verse-server-joy041.vercel.app/users', { name, email })
+                    .then(() => {
+                        reset()
+                        navigate('/')
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Register successful',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    })           
                 })
             })
             .catch(error => setError(error))
