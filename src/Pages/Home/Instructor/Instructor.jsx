@@ -57,7 +57,7 @@ const Instructor = () => {
                         key={instructor._id}
                         className="mb-16"
                     >
-                        <div className="card lg:w-96 h-full bg-slate-800 shadow-xl">
+                        <div className="card lg:w-96 h-full bg-slate-600 shadow-xl">
                             <figure><img src={instructor.image} className="h-56 w-full" alt="Shoes" /></figure>
                             <div className="card-body items-center text-center text-white">
                                 <h2 className="text-3xl font-bold">{instructor.name}</h2>

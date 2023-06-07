@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Client from "../Client/Client";
 import Instructor from "../Instructor/Instructor";
 import PopularClass from "../PopularClass/PopularClass";
 
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <PopularClass></PopularClass>
             <Instructor></Instructor>
+            <Client></Client>
         </div>
     );
 };
