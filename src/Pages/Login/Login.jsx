@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 
 
@@ -84,6 +85,7 @@ const Login = () => {
                                 </div>
                                 <div className='form-control'>
                                     <p className='mt-3 text-center'>Do not Have An Account ? <Link to='/register' className='text-decoration-none text-primary'>Register</Link></p>
+                                    <SocialLogin setError={setError}></SocialLogin>
                                 </div>
                             </form>
                         </div>

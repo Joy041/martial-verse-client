@@ -6,7 +6,7 @@ import app from "../../firebase/firebase";
 export const AuthContext = createContext('')
 const auth = getAuth(app)
 
-const googleProvider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const AuthProvider = ({ children }) => {
@@ -65,10 +65,10 @@ const AuthProvider = ({ children }) => {
         login,
         passwordReset,
         logout,
-        googleLogin,
-        githubLogin,
         user,
-        loading
+        loading,
+        googleLogin,
+        githubLogin
     }
 
     return (

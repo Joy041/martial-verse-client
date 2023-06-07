@@ -21,11 +21,16 @@ const Navbar = () => {
     const navItem = <div className='lg:flex items-center md:text-white '>
         <li><Link to={'/'} className='text-xl font-mono hover:text-rose-600'>Home</Link></li>
         <li><Link className='text-xl font-mono hover:text-rose-600'>Our Service</Link></li>
-        <li><Link to={'/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li>
+        {
+            user ? <li><Link to={'/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
+        }
         <li><Link className='text-xl font-mono hover:text-rose-600'>Contact Us</Link></li>
-        <div className='md:ms-2'>
+        <div className='md:ms-2 flex items-center gap-3'>
             {
-                user ? <Link to={'/login'}><button className="text-base font-bold flex items-center btn bg-rose-600 border-0 text-white" onClick={handleLogout} ><span className="me-1">LOGOUT</span></button></Link> : <Link to={'/login'}><button className="btn bg-rose-600 text-base font-bold flex items-center border-0 text-white"><span className="me-1">LOGIN</span></button></Link>
+                user ? <div><a href="#" data-toggle="tooltip" title={`${user?.displayName}`}><img className="rounded-full w-12" src={user?.photoURL} alt="" /></a></div> : ''
+            }
+            {
+                user ? <Link to={'/login'}><button className="text-base font-bold flex items-center btn bg-rose-600 hover:bg-rose-400 border-0 text-white" onClick={handleLogout} ><span className="me-1">LOGOUT</span></button></Link> : <Link to={'/login'}><button className="btn bg-rose-600 hover:bg-rose-400 text-base font-bold flex items-center border-0 text-white"><span className="me-1">LOGIN</span></button></Link>
             }
         </div>
     </div>

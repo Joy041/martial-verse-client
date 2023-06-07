@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 
 const Register = () => {
@@ -126,6 +127,7 @@ const Register = () => {
                                 </div>
                                 <div className='form-control'>
                                     <p className='mt-3 text-center'>Already Have An Account ? <Link to='/login' className='text-decoration-none text-primary'>Login</Link></p>
+                                    <SocialLogin setError={setError}></SocialLogin>
                                 </div>
                             </form>
                         </div>
