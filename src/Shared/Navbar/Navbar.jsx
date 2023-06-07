@@ -1,6 +1,22 @@
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
+import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Logout Successful',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            })
+    }
 
     const navItem = <div className='lg:flex items-center md:text-white '>
         <li><Link to={'/'} className='text-xl font-mono hover:text-rose-600'>Home</Link></li>
@@ -8,7 +24,9 @@ const Navbar = () => {
         <li><Link to={'/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li>
         <li><Link className='text-xl font-mono hover:text-rose-600'>Contact Us</Link></li>
         <div className='md:ms-2'>
-            <Link to={'/login'}><button className="btn bg-rose-600 border-0 text-white text-base hover:bg-rose-400">Login</button></Link>
+            {
+                user ? <Link to={'/login'}><button className="text-base font-bold flex items-center btn bg-rose-600 border-0 text-white" onClick={handleLogout} ><span className="me-1">LOGOUT</span></button></Link> : <Link to={'/login'}><button className="btn bg-rose-600 text-base font-bold flex items-center border-0 text-white"><span className="me-1">LOGIN</span></button></Link>
+            }
         </div>
     </div>
 

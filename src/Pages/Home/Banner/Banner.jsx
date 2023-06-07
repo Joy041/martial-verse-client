@@ -1,5 +1,3 @@
-import banner from '../../../assets/banner.webp'
-import banner2 from '../../../assets/banner-2.jpg'
 import banner3 from '../../../assets/banner1.webp'
 import { Link } from 'react-router-dom';
 

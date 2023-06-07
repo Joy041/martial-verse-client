@@ -1,18 +1,56 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { signUp, updateUserProfile, verification } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const [error, setError] = useState('')
+
     const onSubmit = data => {
-        const {name, photo, email, password, confirm} = data;
+        const { name, photo, email, password, confirm } = data;
         console.log(name, photo, email, password, confirm)
+
+        setError('')
+
         if (password !== confirm) {
             alert('confirm password not match')
             return;
         }
+
+        signUp(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                userVerification(loggedUser)
+                updateUserProfile(loggedUser, name, photo)
+                .then(result => {
+                    console.log(result)
+                    reset()
+                    navigate('/')
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Register successful',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                })
+            })
+            .catch(error => setError(error))
     };
+
+    const userVerification = (user) => {
+        verification(user)
+            .then(() => {
+                alert('Check your email')
+                return
+            })
+    }
 
     return (
         <div>
@@ -83,6 +121,7 @@ const Register = () => {
                                     </label>
                                 </div>
                                 <div className="form-control mt-6">
+                                    <p className='text-red-600'>{error}</p>
                                     <input type="submit" value="Register" className="bg-rose-600 btn text-white w-full text-lg web-font hover:bg-rose-400" />
                                 </div>
                                 <div className='form-control'>
