@@ -1,26 +1,34 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import axios from "axios";
 
 
 
 const SocialLogin = ({ setError }) => {
     const { googleLogin, githubLogin } = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
 
     const handleGoogleRegister = () => {
         googleLogin()
             .then(result => {
-                console.log(result)
-                navigate('/')
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Welcome to Martialverse',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
+                const loggedUser = result.user;
+
+                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email })
+                    .then(() => {
+                        navigate(from, { replace: true })
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Welcome to Martialverse',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    })
             })
             .catch(error => setError(error.message))
     }
@@ -28,13 +36,17 @@ const SocialLogin = ({ setError }) => {
     const handleGithubRegister = () => {
         githubLogin()
             .then(result => {
-                console.log(result)
-                navigate('/')
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Welcome to Martialverse',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
+                const loggedUser = result.user;
+
+                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email })
+                .then(() => {
+                    navigate(from, { replace: true })
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Welcome to Martialverse',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
                 })
             })
             .catch(error => setError(error.message))

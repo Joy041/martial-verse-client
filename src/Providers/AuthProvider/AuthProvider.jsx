@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from "../../firebase/firebase";
+import axios from "axios";
 
 
 export const AuthContext = createContext('')
@@ -38,7 +39,17 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
-            setLoading(false)
+            
+            if(currentUser){
+                axios.post('https://martial-verse-server-joy041.vercel.app/tokens', {email : currentUser.email})
+                    .then(data => {
+                        localStorage.setItem('martial-verse-token', data.data.token)
+                        setLoading(false)
+                    })
+            }
+            else {
+                localStorage.removeItem('martial-verse-token')
+            }
         });
         return () => {
             unsubscribe();
