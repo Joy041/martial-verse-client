@@ -20,11 +20,11 @@ const Navbar = () => {
 
     const navItem = <div className='lg:flex items-center md:text-white '>
         <li><Link to={'/'} className='text-xl font-mono hover:text-rose-600'>Home</Link></li>
-        <li><Link className='text-xl font-mono hover:text-rose-600'>Our Service</Link></li>
+        <li><Link to={'/instructor'} className='text-xl font-mono hover:text-rose-600'>Instructors</Link></li>
+        <li><Link to={'/classes'} className='text-xl font-mono hover:text-rose-600'>Classes</Link></li>
         {
             user ? <li><Link to={'/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
         }
-        <li><Link className='text-xl font-mono hover:text-rose-600'>Contact Us</Link></li>
         <div className='md:ms-2 flex items-center gap-3'>
             {
                 user ? <div><a href="#" data-toggle="tooltip" title={`${user?.displayName}`}><img className="rounded-full w-8" src={user?.photoURL} alt="" /></a></div> : ''

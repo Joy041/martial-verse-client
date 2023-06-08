@@ -7,7 +7,7 @@ const ShowPopularClass = ({service}) => {
     return (
         <div className="card  h-full bg-slate-800 shadow-xl">
             <figure><img src={image} className="h-56 w-full" alt="Shoes" /></figure>
-            <div className="card-body items-center text-center">
+            <div className="card-body items-center text-center text-white">
                 <h2 className="text-3xl font-bold">{name}</h2>
                 <p><span className="text-lg font-semibold">Instructor Name :</span> {instructor_name}</p>
                 <p><span className="text-lg font-semibold">Available Seats :</span> {seats}</p>
