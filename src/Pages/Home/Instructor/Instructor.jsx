@@ -5,10 +5,31 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import { useState } from "react";
 
 
 const Instructor = () => {
     const [axiosSecure] = useAxiosSecure()
+    const [toggle, setToggle] = useState({
+        color: 'white',
+        backgroundColor: 'black'
+    })
+
+    const toggleStyle = () => {
+        if (toggle.color === 'white') {
+            setToggle({
+                color: 'black',
+                backgroundColor: 'white'
+            })
+        }
+
+        else {
+            setToggle({
+                color: 'white',
+                backgroundColor: 'black'
+            })
+        }
+    }
 
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructors'],
@@ -19,8 +40,8 @@ const Instructor = () => {
     })
 
     return (
-        <div className="bg-cyan-50 pb-28 px-4">
-            <h1 className="text-center text-5xl md:text-7xl pt-28 pb-20 font-bold">Our Instructors</h1>
+        <div className="bg-cyan-50 pb- px-4" style={toggle}>
+            <h1 className="text-center text-5xl md:text-7xl pt-24 pb-28 font-bold">Our Instructors</h1>
             <Swiper
                 slidesPerView={3}
                 spaceBetween={20}
@@ -33,7 +54,6 @@ const Instructor = () => {
                     clickable: true,
                 }}
 
-                // grabCursor={true}
                 breakpoints={
                     {
                         0: {
@@ -67,6 +87,7 @@ const Instructor = () => {
                     </SwiperSlide>)
                 }
             </Swiper>
+            <button onClick={toggleStyle} className="btn bg-rose-600 border-0 mt-20 mb-8 hover:bg-rose-400">Toggle Dark/Light</button>
         </div>
     );
 };
