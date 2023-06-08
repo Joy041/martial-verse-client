@@ -34,7 +34,7 @@ const Instructor = () => {
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructors'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/instructors')
+            const res = await axiosSecure.get('/users')
             return res.data
         }
     })
@@ -73,18 +73,22 @@ const Instructor = () => {
                 className="mySwiper"
             >
                 {
-                    instructors.slice(0, 6).map(instructor => <SwiperSlide
-                        key={instructor._id}
-                        className="mb-16"
-                    >
-                        <div className="card lg:w-96 h-full bg-slate-600 shadow-xl">
-                            <figure><img src={instructor.image} className="h-56 w-full" alt="Shoes" /></figure>
-                            <div className="card-body items-center text-center text-white">
-                                <h2 className="text-3xl font-bold">{instructor.name}</h2>
-                                <p><span className="text-lg font-semibold">Instructor Email :</span> {instructor.email}</p>
-                            </div>
-                        </div>
-                    </SwiperSlide>)
+                    instructors.slice(0, 7).map(instructor => <>
+                        {
+                            instructor.role === 'instructor' && <SwiperSlide
+                                key={instructor._id}
+                                className="mb-16"
+                            >
+                                <div className="card lg:w-96 h-full bg-slate-600 shadow-xl">
+                                    <figure><img src={instructor.image} className="h-56 w-full" alt="Shoes" /></figure>
+                                    <div className="card-body items-center text-center text-white">
+                                        <h2 className="text-3xl font-bold">{instructor.name}</h2>
+                                        <p><span className="text-lg font-semibold">Instructor Email :</span> {instructor.email}</p>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        }
+                    </>)
                 }
             </Swiper>
             <button onClick={toggleStyle} className="btn bg-rose-600 border-0 mt-20 mb-8 hover:bg-rose-400">Toggle Dark/Light</button>
