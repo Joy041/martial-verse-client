@@ -32,7 +32,7 @@ const Instructor = () => {
     }
 
     const { data: instructors = [] } = useQuery({
-        queryKey: ['instructors'],
+        queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
             return res.data

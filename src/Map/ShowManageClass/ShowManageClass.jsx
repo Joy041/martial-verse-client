@@ -14,8 +14,12 @@ const ShowManageClass = ({service, handleDeniedClasses, handleApprovedClasses}) 
                 <p><span className="text-lg font-semibold">Price :</span> <span className="text-orange-600 font-bold">${price}</span></p>
                 <p>{status}</p>
                 <div className="card-actions">
-                    <button onClick={() => handleApprovedClasses(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8 ">Approved</button>
-                    <button onClick={() => handleDeniedClasses(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Denied</button>
+                    {
+                        status === 'approved' ? <button disabled className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8 ">Approved</button> : <button onClick={() => handleApprovedClasses(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8 ">Approved</button>
+                    }
+                    {
+                        status === 'denied' ? <button disabled className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Denied</button> : <button onClick={() => handleDeniedClasses(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Denied</button>
+                    }
                 </div>
             </div>
         </div>

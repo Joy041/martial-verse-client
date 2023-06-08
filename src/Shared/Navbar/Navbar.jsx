@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
+import useAdmin from '../../hook/useAdmin';
+import useInstructor from '../../hook/useInstructor';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
+    const [isAdmin] = useAdmin()
+    const [isInstructor] = useInstructor()
 
     const handleLogout = () => {
         logout()
@@ -23,7 +27,7 @@ const Navbar = () => {
         <li><Link to={'/instructor'} className='text-xl font-mono hover:text-rose-600'>Instructors</Link></li>
         <li><Link to={'/classes'} className='text-xl font-mono hover:text-rose-600'>Classes</Link></li>
         {
-            user ? <li><Link to={'/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
+            user ? <li><Link to={isAdmin && '/dashboard/manageclass' || isInstructor && '/dashboard/myclass'  || '/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
         }
         <div className='md:ms-2 flex items-center gap-3'>
             {
