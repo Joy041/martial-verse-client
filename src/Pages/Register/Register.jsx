@@ -32,7 +32,7 @@ const Register = () => {
                 userVerification(loggedUser)
                 updateUserProfile(loggedUser, name, photo)
                 .then(() => {
-                    axios.post('https://martial-verse-server-joy041.vercel.app/users', { name, email })
+                    axios.post('https://martial-verse-server-joy041.vercel.app/users', { name, email, image: photo })
                     .then(() => {
                         reset()
                         navigate('/')
