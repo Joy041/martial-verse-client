@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import ShowManageClass from "../../../../Map/ShowManageClass/ShowManageClass";
+import Swal from "sweetalert2";
 
 
 const ManageClasses = () => {
     const [axiosSecure] = useAxiosSecure()
 
-    const {data: services = []} = useQuery({
+    const {data: services = [], refetch} = useQuery({
         queryKey: ['service'],
         queryFn: async () => {
             const res = await axiosSecure.get('/services')
@@ -15,11 +16,33 @@ const ManageClasses = () => {
     })
 
     const handleApprovedClasses = service => {
-        console.log(service)
+        axiosSecure.patch(`/services/approved/${service._id}`)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    refetch()
+                    Swal.fire({
+                        title: 'Success!',
+                        text: `${service.name} is approved`,
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+            })
     }
 
     const handleDeniedClasses = service => {
-        console.log(service)
+        axiosSecure.patch(`/services/denied/${service._id}`)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    refetch()
+                    Swal.fire({
+                        title: 'Success!',
+                        text: `${service.name} is denied`,
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+            })
     }
 
     return (

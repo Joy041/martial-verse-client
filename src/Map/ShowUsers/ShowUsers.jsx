@@ -15,12 +15,13 @@ const ShowUsers = ({ user, handleMakeAdmin, handleMakeInstructor }) => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name}</h2>
                     <p>{email}</p>
+                    <p>{role === 'admin' && 'admin' || role === 'instructor' && 'instructor' || 'student' }</p>
                     <div className="card-actions">
                         {
-                            role === 'admin' ? <span className="text-base font-bold mt-3">admin</span> : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline block border-rose-600 text-rose-600">Admin</button>
+                            role === 'admin' ? <button disabled className="btn btn-outline block border-rose-600 text-rose-600">Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline block border-rose-600 text-rose-600">Admin</button>
                         }
                         {
-                            role === 'instructor' ? <span className="text-base font-bold mt-3">instructor</span> : <button onClick={() => handleMakeInstructor(user)} className="btn btn-outline block border-rose-600 text-rose-600">Instructor</button>
+                            role === 'instructor' ? <button className="btn btn-outline block border-rose-600 text-rose-600" disabled>Instructor</button> : <button onClick={() => handleMakeInstructor(user)} className="btn btn-outline block border-rose-600 text-rose-600">Instructor</button>
                         }
                     </div>
                 </div>
