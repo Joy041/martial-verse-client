@@ -10,6 +10,7 @@ const PopularClass = () => {
         queryKey: ['services'],
         queryFn: async () => {
             const res = await axiosSecure.get('/services')
+            console.log(res.data)
             return res.data
         }
     })

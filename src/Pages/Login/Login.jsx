@@ -24,8 +24,7 @@ const Login = () => {
         console.log(email, password)
 
         login(email, password)
-        .then((result) => {
-            console.log(result)
+        .then(() => {
             reset()
             navigate(from, {replace: true})
             Swal.fire({

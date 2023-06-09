@@ -27,7 +27,7 @@ const Navbar = () => {
         <li><Link to={'/instructor'} className='text-xl font-mono hover:text-rose-600'>Instructors</Link></li>
         <li><Link to={'/classes'} className='text-xl font-mono hover:text-rose-600'>Classes</Link></li>
         {
-            user ? <li><Link to={isAdmin && '/dashboard/manageclass' || isInstructor && '/dashboard/myclass'  || '/dashboard'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
+            user ? <li><Link to={isAdmin && '/dashboard/manageclass' || isInstructor && '/dashboard/myclass'  || '/dashboard/selectclass'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
         }
         <div className='md:ms-2 flex items-center gap-3'>
             {

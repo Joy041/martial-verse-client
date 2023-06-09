@@ -58,14 +58,17 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const logout = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
     const googleLogin = () => {
+        setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
     const githubLogin = () => {
+        setLoading(true)
         return signInWithPopup(auth, githubProvider)
     }
 

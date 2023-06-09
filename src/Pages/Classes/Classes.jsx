@@ -1,17 +1,59 @@
 import { useQuery } from '@tanstack/react-query';
 import bgImg from '../../assets/bg6.jpg'
 import useAxiosSecure from '../../hook/useAxiosSecure';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Classes = () => {
     const [axiosSecure] = useAxiosSecure()
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const { data: classes = [] } = useQuery({
+    const { data: classes = [], refetch } = useQuery({
         queryKey: ['services'],
         queryFn: async () => {
             const res = await axiosSecure.get('/services')
             return res.data
         }
     })
+
+    const handleAddToSelectedSection = service => {
+
+        const { _id, image, name, instructor_name, price } = service
+
+        if (user && user.email) {
+            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email })
+                .then(res => {
+                    if (res.data.insertedId) {
+                        refetch()
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Successfully selected',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    }
+                })
+        }
+
+        else {
+            Swal.fire({
+                title: 'Please login for select this class',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login Now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
+        }
+    }
 
     return (
         <div>
@@ -31,7 +73,7 @@ const Classes = () => {
                                     <p><span className="text-lg font-semibold">Available Seats :</span> {service.seats}</p>
                                     <p><span className="text-lg font-semibold">Price :</span> <span className="text-orange-600 font-bold">${service.price}</span></p>
                                     <div className="card-actions">
-                                        <button className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
+                                        <button onClick={() => handleAddToSelectedSection(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
                                     </div>
                                 </div>
                             </div>
