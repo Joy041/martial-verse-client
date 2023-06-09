@@ -13,6 +13,7 @@ import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import InstructorRoutes from "../InstructorRoutes/InstructorRoutes";
 import SelectClass from "../../Pages/Dashboard/Student/SelectClass/SelectClass";
 import Payment from "../../Pages/Dashboard/Student/Payment/Payment";
+import Instructors from "../../Pages/Instructors/Instructors";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         {
           path: 'classes',
           element: <Classes></Classes>
+        },
+        {
+          path: 'instructors',
+          element: <Instructors></Instructors>
         }
       ]
     },

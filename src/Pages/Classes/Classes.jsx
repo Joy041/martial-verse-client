@@ -59,9 +59,9 @@ const Classes = () => {
         <div>
             <div>
                 <img src={bgImg} className=' absolute  h-[345px] md:h-72 w-full opacity-80' alt="" />
-                <h1 className=' relative text-center text-white text-6xl font-extrabold pt-24 pb-[132px] bg-gradient-to-r from-black to-[rgba(21, 21, 21, 0)] '>Our Classes</h1>
+                <h1 className=' relative text-center text-white text-4xl md:text-6xl font-extrabold pt-24 pb-[146px] md:pb-[148px] bg-gradient-to-r from-black to-[rgba(21, 21, 21, 0)] '>Our Classes</h1>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 pt-36 pb-36  bg-cyan-800'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-24 bg-cyan-800'>
                 {
                     classes.map(service => <>
                         {

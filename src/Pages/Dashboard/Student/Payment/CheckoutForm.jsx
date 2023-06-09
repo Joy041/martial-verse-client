@@ -4,6 +4,7 @@ import useSelectedClass from "../../../../hook/useSelectedClass";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import './CheckoutForm.css'
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -109,9 +110,7 @@ const CheckoutForm = () => {
 
     }
     return (
-        <>
-        <p>Total: {price}</p>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="w-96 mx-4">
                 <CardElement
                     options={{
                         style: {
@@ -134,7 +133,6 @@ const CheckoutForm = () => {
                 <p className="text-red-600 mt-3">{error && `Error : ${error}`}</p>
                 <p className="text-green-600 mt-3">{transactionId && 'Transaction complete'}</p>
             </form>
-        </>
     );
 };
 

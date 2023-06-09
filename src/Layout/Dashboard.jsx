@@ -1,7 +1,7 @@
 import { FaUsers } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { MdClass } from "react-icons/md";
-import { MdSelectAll } from "react-icons/md";
+import { BiSelectMultiple } from "react-icons/bi";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { GiTeacher } from "react-icons/gi";
 import { NavLink, Outlet } from "react-router-dom";
@@ -16,7 +16,7 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col ">
+            <div className="drawer-content flex flex-col "> 
                 <Outlet></Outlet>
 
                 <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                         ||
 
                         <>
-                            <li><NavLink to={'/dashboard/selectclass'} className="text-slate-500 text-lg font-semibold uppercase"><MdSelectAll></MdSelectAll>My selected classes</NavLink></li>
+                            <li><NavLink to={'/dashboard/selectclass'} className="text-slate-500 text-lg font-semibold uppercase"><BiSelectMultiple></BiSelectMultiple>My selected classes</NavLink></li>
                             <li><NavLink to={'/dashboard/users'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
                         </>
                     }

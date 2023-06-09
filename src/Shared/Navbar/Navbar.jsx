@@ -24,7 +24,7 @@ const Navbar = () => {
 
     const navItem = <div className='lg:flex items-center md:text-white '>
         <li><Link to={'/'} className='text-xl font-mono hover:text-rose-600'>Home</Link></li>
-        <li><Link to={'/instructor'} className='text-xl font-mono hover:text-rose-600'>Instructors</Link></li>
+        <li><Link to={'/instructors'} className='text-xl font-mono hover:text-rose-600'>Instructors</Link></li>
         <li><Link to={'/classes'} className='text-xl font-mono hover:text-rose-600'>Classes</Link></li>
         {
             user ? <li><Link to={isAdmin && '/dashboard/manageclass' || isInstructor && '/dashboard/myclass'  || '/dashboard/selectclass'} className='text-xl font-mono hover:text-rose-600'>Dashboard</Link></li> : ''
