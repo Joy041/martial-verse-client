@@ -7,7 +7,7 @@ const ShowPopularClass = ({ service }) => {
     return (
         <div>
             {
-                status === 'approved' &&    
+                status === 'approved' ||    
                 <div className="card  h-full bg-slate-800 shadow-xl">
                     <figure><img src={image} className="h-56 w-full" alt="Shoes" /></figure>
                     <div className="card-body items-center text-center text-white">
@@ -22,7 +22,6 @@ const ShowPopularClass = ({ service }) => {
                 </div>
             }
         </div>
-
     );
 };
 
