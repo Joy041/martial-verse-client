@@ -1,24 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
 import bgImg from '../../assets/bg6.jpg'
 import useAxiosSecure from '../../hook/useAxiosSecure';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useClasses from '../../hook/useClasses';
 
 const Classes = () => {
     const [axiosSecure] = useAxiosSecure()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
-
-    const { data: classes = [], refetch } = useQuery({
-        queryKey: ['services'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/services')
-            return res.data
-        }
-    })
+    const [classes, refetch] = useClasses()
 
     const handleAddToSelectedSection = service => {
 

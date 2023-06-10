@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hook/useAxiosSecure';
 import './PopularClass.css'
 import ShowPopularClass from '../../../Map/ShowPopularClass/ShowPopularClass';
@@ -6,21 +5,14 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useClasses from '../../../hook/useClasses';
 
 const PopularClass = () => {
     const [axiosSecure] = useAxiosSecure()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
-
-    const { data: services = [], refetch } = useQuery({
-        queryKey: ['services'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/services')
-            console.log(res.data)
-            return res.data
-        }
-    })
+    const [classes, refetch] = useClasses()
 
     const handleAddToSelectedSection = service => {
         const { _id, image, name, instructor_name, price } = service
@@ -61,7 +53,7 @@ const PopularClass = () => {
             <h1 className='text-center text-white text-7xl py-16 font-bold'>Our classes</h1>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 px-4 md:pb-12 md:px-20 lg:pb-32 lg:px-64">
                 {
-                    services.slice(0, 6).map(service => <ShowPopularClass
+                    classes.slice(0, 6).map(service => <ShowPopularClass
                         key={service._id}
                         service={service}
                         handleAddToSelectedSection={handleAddToSelectedSection}

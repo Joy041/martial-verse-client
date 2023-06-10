@@ -94,7 +94,7 @@ const CheckoutForm = () => {
                 classItem: selectClass.map(item => item.classId)
             }
 
-            axiosSecure.post('/payment', payment)
+            axiosSecure.post('/payments', payment)
             .then(res => {
                 if(res.data.paymentResult.insertedId){
                     Swal.fire({
@@ -110,7 +110,7 @@ const CheckoutForm = () => {
 
     }
     return (
-            <form onSubmit={handleSubmit} className="w-96 mx-4">
+            <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {

@@ -43,7 +43,7 @@ const Dashboard = () => {
 
                         <>
                             <li><NavLink to={'/dashboard/selectclass'} className="text-slate-500 text-lg font-semibold uppercase"><BiSelectMultiple></BiSelectMultiple>My selected classes</NavLink></li>
-                            <li><NavLink to={'/dashboard/users'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
+                            <li><NavLink to={'/dashboard/enrolled'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
                         </>
                     }
 
