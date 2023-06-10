@@ -9,29 +9,57 @@ const EnrolledClasses = () => {
 
 
     return (
-        <div className="px-8 pt-8 pb-14 bg-cyan-800">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-">
-                {
-                    paymentClass.map(payment => <div
-                        key={payment._id}
-                    >
-                        <div>
-                            {
-                                classes.map(item => <div key={item._id}>{
-                                    ((payment.classItem).map(enroll => <div key={enroll._id}> {enroll === item._id && <div className="card  h-full bg-slate-800 shadow-xl mb-8 md:me-8">
-                                        <figure><img src={item.image} className="h-56 w-full" alt="Shoes" /></figure>
-                                        <div className="card-body items-center text-center text-white">
-                                            <h2 className="text-3xl font-bold">{item.name}</h2>
-                                            <p><span className="text-lg font-semibold">Instructor Name :</span> {item.instructor_name}</p>
+        <div className="my-16">
+            <div className="bg-sky-50 px-6 py-12">
+                <div className="mt-9">
+                    <div className="overflow-x-auto w-ful   ">
+                        <table className="table w-ful">
+                            {/* head */}
+                            <thead>
+                                <td className="flex justify-between">
+                                    <th className="font-bold text-base">IMAGE</th>
+                                    <th className="font-bold text-base">CLASS NAME</th>
+                                    <th className="font-bold text-base">INSTRUCTOR NAME</th>
+                                    <th className="font-bold text-base">PRICE</th>
+                                </td>
+                            </thead>
+                            <tbody>
+                                {
+                                    paymentClass.map((payment) => <div
+                                        key={payment._id}
+                                    >
+                                        <div>
+                                            {
+                                                classes.map(item => <div key={item._id}>{
+                                                    ((payment.classItem).map(enroll => <div key={enroll._id}> {enroll === item._id && <tr className="flex justify-between items-center">
+                                                        <td>
+                                                            <div className="flex items-center space-x-3">
+                                                                <div className="avatar">
+                                                                    <div className="mask mask-squircle w-12 h-12">
+                                                                        <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            {item.name}
+                                                        </td>
+                                                        <td>
+                                                            {item.instructor_name}
+                                                        </td>
+                                                        <td><span className='text-orange-500'>${item.price}</span></td>
+                                                    </tr>}</div>))
+
+                                                }</div>)
+                                            }
                                         </div>
-                                    </div>}</div>))
 
-                                }</div>)
-                            }
-                        </div>
-
-                    </div>)
-                }
+                                    </div>)
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import './CheckoutForm.css'
+import useClasses from "../../../../hook/useClasses";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -18,7 +19,9 @@ const CheckoutForm = () => {
     const {user} = useContext(AuthContext)
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
+    const [classes] = useClasses()
 
+    const selectId = selectClass.map(item => item.classId)
 
     useEffect(() => {
         console.log(price)
@@ -97,6 +100,9 @@ const CheckoutForm = () => {
             axiosSecure.post('/payments', payment)
             .then(res => {
                 if(res.data.paymentResult.insertedId){
+
+                    classes.map(item => item._id === selectId && (item.seats - 1))
+
                     Swal.fire({
                         title: 'Success!',
                         text: 'Payment successful',

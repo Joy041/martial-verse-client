@@ -3,7 +3,7 @@ import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
 
-const stripePromise = loadStripe('pk_test_51NEeFsFmrQFHfywn8Vd9o2n9JAbP12xCtcIb0h9D7jupIAgKLvw91FpB8l1owu6uIwn2Ap3PhObb7kFcRaarGj0X00u1PC33Je')
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK_TOKEN)
 const Payment = () => {
 
     return (

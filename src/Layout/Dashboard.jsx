@@ -1,4 +1,4 @@
-import { FaUsers } from "react-icons/fa";
+import { FaUsers, FaWallet } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { MdClass } from "react-icons/md";
 import { BiSelectMultiple } from "react-icons/bi";
@@ -25,7 +25,7 @@ const Dashboard = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                    <p className="text-4xl text-center font-bold mb-10 mt-4">MARTIAL<span className="text-lime-500">verse</span></p>
+                    <p className="text-4xl text-center font-bold mb-10 pt-4">MARTIAL<span className="text-lime-500">verse</span></p>
                     {
                         isAdmin &&
                         <>
@@ -36,7 +36,7 @@ const Dashboard = () => {
 
                         isInstructor &&
                         <>
-                            <li><NavLink to={'/'} className="text-slate-500 text-lg font-semibold uppercase"><AiFillPlusCircle></AiFillPlusCircle>Add a class</NavLink></li>
+                            <li><NavLink to={'/dashboard/addclass'} className="text-slate-500 text-lg font-semibold uppercase"><AiFillPlusCircle></AiFillPlusCircle>Add a class</NavLink></li>
                             <li><NavLink to={'/dashboard/myclass'} className="text-slate-500 text-lg font-semibold uppercase"><GiTeacher></GiTeacher>My class</NavLink></li>
                         </>
                         ||
@@ -44,6 +44,7 @@ const Dashboard = () => {
                         <>
                             <li><NavLink to={'/dashboard/selectclass'} className="text-slate-500 text-lg font-semibold uppercase"><BiSelectMultiple></BiSelectMultiple>My selected classes</NavLink></li>
                             <li><NavLink to={'/dashboard/enrolled'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
+                            <li><NavLink to={'/dashboard/paymenthistory'} className="text-slate-500 text-lg font-semibold uppercase"><FaWallet></FaWallet>Payment History</NavLink></li>
                         </>
                     }
 

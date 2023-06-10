@@ -10,13 +10,13 @@ import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
-    const {login, passwordReset} = useContext(AuthContext)
+    const { login, passwordReset } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const emailRef = useRef()
     const [error, setError] = useState('')
 
-    const from = location.state?.from?.pathname || '/' 
+    const from = location.state?.from?.pathname || '/'
 
 
     const onSubmit = data => {
@@ -24,27 +24,27 @@ const Login = () => {
         console.log(email, password)
 
         login(email, password)
-        .then(() => {
-            reset()
-            navigate(from, {replace: true})
-            Swal.fire({
-                title: 'Success!',
-                text: 'Login successful',
-                icon: 'success',
-                confirmButtonText: 'Cool'
+            .then(() => {
+                reset()
+                navigate(from, { replace: true })
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Login successful',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             })
-        })
-        .catch(error => setError(error.message))
+            .catch(error => setError(error.message))
     }
 
     const handleForgotPassword = () => {
         const email = emailRef.current.value;
         passwordReset(email)
-        .then(() => {
-            alert('Check your email')
-            return
-        })
-        .catch(error => setError(error.message))
+            .then(() => {
+                alert('Check your email')
+                return
+            })
+            .catch(error => setError(error.message))
     }
 
     return (
@@ -58,7 +58,7 @@ const Login = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
                         <p className="py-6">Please login your account for take our service and connect with us!!</p>
                     </div>
-                    <div className="card flex-shrink-0 w-full md:w-[500px] shadow-2xl bg-base-100">
+                    <div className="card flex-shrink-0 w-full md:w-[600px] shadow-2xl bg-base-100">
                         <div className="card-body">
                             <form onSubmit={handleSubmit(onSubmit)}
                             >
@@ -91,6 +91,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
