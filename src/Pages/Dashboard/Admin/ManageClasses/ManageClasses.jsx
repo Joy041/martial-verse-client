@@ -34,6 +34,7 @@ const ManageClasses = () => {
         axiosSecure.patch(`/services/denied/${service._id}`)
             .then(res => {
                 if (res.data.modifiedCount) {
+                    
                     refetch()
                     Swal.fire({
                         title: 'Success!',
