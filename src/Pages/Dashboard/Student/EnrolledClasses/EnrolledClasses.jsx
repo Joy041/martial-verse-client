@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useClasses from "../../../../hook/useClasses";
 import usePaymentClass from "../../../../hook/usePaymentClass";
 // import ShowEnrolledClass from "../../../../Map/ShowEnrolledClass/ShowEnrolledClass";
@@ -10,6 +11,9 @@ const EnrolledClasses = () => {
 
     return (
         <div className="my-16">
+            <Helmet>
+                <title>Martialverse || Dashboard || Enrolled Class</title>
+            </Helmet>
             <div className="bg-sky-50 px-6 py-12">
                 <div className="mt-9">
                     <div className="overflow-x-auto w-ful   ">
@@ -25,9 +29,7 @@ const EnrolledClasses = () => {
                             </thead>
                             <tbody>
                                 {
-                                    paymentClass.map((payment) => <div
-                                        key={payment._id}
-                                    >
+                                    paymentClass.map(payment => <div key={payment._id}>
                                         <div>
                                             {
                                                 classes.map(item => <div key={item._id}>{

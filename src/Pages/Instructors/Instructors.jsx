@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import bgImg from '../../assets/bg6.jpg'
+import { Helmet } from "react-helmet-async";
 
 
 const Instructors = () => {
@@ -16,6 +17,9 @@ const Instructors = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Martialverse || Instructor</title>
+            </Helmet>
             <div>
                 <img src={bgImg} className=' absolute  h-[345px] md:h-72 w-full opacity-80' alt="" />
                 <h1 className=' relative text-center text-white text-4xl md:text-6xl font-extrabold pt-24 pb-[146px] md:pb-[148px] bg-gradient-to-r from-black to-[rgba(21, 21, 21, 0)] '>Our Instructors</h1>

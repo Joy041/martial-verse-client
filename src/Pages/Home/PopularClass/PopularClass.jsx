@@ -15,10 +15,10 @@ const PopularClass = () => {
     const [classes, refetch] = useClasses()
 
     const handleAddToSelectedSection = service => {
-        const { _id, image, name, instructor_name, price } = service
+        const { _id, image, name, instructor_name, price, seats } = service
 
         if (user && user.email) {
-            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email })
+            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email, seats })
                 .then(res => {
                     if (res.data.insertedId) {
                         refetch()

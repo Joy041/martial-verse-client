@@ -17,6 +17,7 @@ import Instructors from "../../Pages/Instructors/Instructors";
 import EnrolledClasses from "../../Pages/Dashboard/Student/EnrolledClasses/EnrolledClasses";
 import PaymentHistory from "../../Pages/Dashboard/Student/PaymentHistory/PaymentHistory";
 import AddClass from "../../Pages/Dashboard/Instructor/AddClass/AddClass";
+import Error from "../../Pages/Error/Error";
 
 const router = createBrowserRouter([
     {
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
         },
         {
           path: 'addclass',
-          element: <AddClass></AddClass>
+          element: <InstructorRoutes><AddClass></AddClass></InstructorRoutes>
         },
 
         // STUDENT
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
         }
         
       ]
+    },
+    {
+      path: '*',
+      element: <Error></Error>
     }
   ]);
   

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import ShowPaymentHistory from "../../../../Map/ShowPaymentHistory/ShowPaymentHistory";
 import usePaymentClass from "../../../../hook/usePaymentClass";
 
@@ -7,9 +8,11 @@ const PaymentHistory = () => {
 
     return (
         <div>
-            <h1>{paymentClass.length}</h1>
-            <div className="my-16">
-                <div className="bg-sky-50 px-6 py-12">
+            <Helmet>
+                <title>Martialverse || Dashboard || Payment History</title>
+            </Helmet>
+            <div className="my-4">
+                <div className="bg-sky-50 px-6 pt-4 pb-12">
                     <div className="mt-9">
                         <div className="overflow-x-auto w-full">
                             <table className="table w-full">

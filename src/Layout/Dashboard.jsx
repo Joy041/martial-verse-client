@@ -29,28 +29,28 @@ const Dashboard = () => {
                     {
                         isAdmin &&
                         <>
-                            <li><NavLink to={'/dashboard/manageclass'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>Manage Classes</NavLink></li>
-                            <li><NavLink to={'/dashboard/users'} className="text-slate-500 text-lg font-semibold uppercase"><FaUsers></FaUsers>Manage User</NavLink></li>
+                            <li><NavLink to={'/dashboard/manageclass'} className="text-slate-500 text-base font-semibold uppercase"><MdClass></MdClass>Manage Classes</NavLink></li>
+                            <li><NavLink to={'/dashboard/users'} className="text-slate-500 text-base font-semibold uppercase"><FaUsers></FaUsers>Manage User</NavLink></li>
                         </>
                         ||
 
                         isInstructor &&
                         <>
-                            <li><NavLink to={'/dashboard/addclass'} className="text-slate-500 text-lg font-semibold uppercase"><AiFillPlusCircle></AiFillPlusCircle>Add a class</NavLink></li>
-                            <li><NavLink to={'/dashboard/myclass'} className="text-slate-500 text-lg font-semibold uppercase"><GiTeacher></GiTeacher>My class</NavLink></li>
+                            <li><NavLink to={'/dashboard/addclass'} className="text-slate-500 text-base font-semibold uppercase"><AiFillPlusCircle></AiFillPlusCircle>Add a class</NavLink></li>
+                            <li><NavLink to={'/dashboard/myclass'} className="text-slate-500 text-base font-semibold uppercase"><GiTeacher></GiTeacher>My class</NavLink></li>
                         </>
                         ||
 
                         <>
                             <li><NavLink to={'/dashboard/selectclass'} className="text-slate-500 text-lg font-semibold uppercase"><BiSelectMultiple></BiSelectMultiple>My selected classes</NavLink></li>
-                            <li><NavLink to={'/dashboard/enrolled'} className="text-slate-500 text-lg font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
-                            <li><NavLink to={'/dashboard/paymenthistory'} className="text-slate-500 text-lg font-semibold uppercase"><FaWallet></FaWallet>Payment History</NavLink></li>
+                            <li><NavLink to={'/dashboard/enrolled'} className="text-slate-500 text-base font-semibold uppercase"><MdClass></MdClass>My enrolled classes</NavLink></li>
+                            <li><NavLink to={'/dashboard/paymenthistory'} className="text-slate-500 text-base font-semibold uppercase"><FaWallet></FaWallet>Payment History</NavLink></li>
                         </>
                     }
 
                     <div className="divider"></div>
 
-                    <li><NavLink to={'/'} className="text-lg font-semibold text-slate-500"><HiHome></HiHome>HOME</NavLink></li>
+                    <li><NavLink to={'/'} className="text-base font-semibold text-slate-500"><HiHome></HiHome>HOME</NavLink></li>
 
                 </ul>
 

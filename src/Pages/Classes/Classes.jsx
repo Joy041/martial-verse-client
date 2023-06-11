@@ -5,6 +5,9 @@ import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useClasses from '../../hook/useClasses';
+import useAdmin from '../../hook/useAdmin';
+import useInstructor from '../../hook/useInstructor';
+import { Helmet } from 'react-helmet-async';
 
 const Classes = () => {
     const [axiosSecure] = useAxiosSecure()
@@ -12,13 +15,15 @@ const Classes = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [classes, refetch] = useClasses()
+    const [isAdmin] = useAdmin()
+    const [isInstructor] = useInstructor()
 
     const handleAddToSelectedSection = service => {
 
-        const { _id, image, name, instructor_name, price } = service
+        const { _id, image, name, instructor_name, price, seats } = service
 
         if (user && user.email) {
-            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email })
+            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email, seats })
                 .then(res => {
                     if (res.data.insertedId) {
                         refetch()
@@ -50,6 +55,9 @@ const Classes = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Martialverse || Classes</title>
+            </Helmet>
             <div>
                 <img src={bgImg} className=' absolute  h-[345px] md:h-72 w-full opacity-80' alt="" />
                 <h1 className=' relative text-center text-white text-4xl md:text-6xl font-extrabold pt-24 pb-[146px] md:pb-[148px] bg-gradient-to-r from-black to-[rgba(21, 21, 21, 0)] '>Our Classes</h1>
@@ -66,7 +74,7 @@ const Classes = () => {
                                     <p><span className="text-lg font-semibold">Available Seats :</span> {service.seats}</p>
                                     <p><span className="text-lg font-semibold">Price :</span> <span className="text-orange-600 font-bold">${service.price}</span></p>
                                     <div className="card-actions">
-                                        <button onClick={() => handleAddToSelectedSection(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
+                                        <button onClick={() => handleAddToSelectedSection(service)} disabled={isAdmin || isInstructor} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
                                     </div>
                                 </div>
                             </div>

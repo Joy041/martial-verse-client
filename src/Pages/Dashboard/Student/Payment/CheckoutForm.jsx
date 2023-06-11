@@ -5,7 +5,6 @@ import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import './CheckoutForm.css'
-import useClasses from "../../../../hook/useClasses";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -16,23 +15,23 @@ const CheckoutForm = () => {
     const price = parseFloat(total.toFixed(2))
     const [axiosSecure] = useAxiosSecure()
     const [clientSecret, setClientSecret] = useState('')
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
-    const [classes] = useClasses()
-
-    const selectId = selectClass.map(item => item.classId)
 
     useEffect(() => {
         console.log(price)
-        if(price > 0){
-              axiosSecure.post('/create-payment', {price})
-              .then(res => {
-                  console.log(res.data.clientSecret)
-                  setClientSecret(res.data.clientSecret)
-              })
+        if (price > 0) {
+            axiosSecure.post('/create-payment', { price })
+                .then(res => {
+                    console.log(res.data.clientSecret)
+                    setClientSecret(res.data.clientSecret)
+                })
         }
     }, [price, axiosSecure])
+
+
+    
 
 
     const handleSubmit = async (event) => {
@@ -73,19 +72,19 @@ const CheckoutForm = () => {
             },
         );
 
-        if(confirmError){
+        if (confirmError) {
             setError(confirmError.message)
             console.log(confirmError)
         }
-        else{
+        else {
             setError('')
-            console.log('paymentIntent',paymentIntent)
+            console.log('paymentIntent', paymentIntent)
         }
 
         setProcessing(false)
-        if(paymentIntent.status === 'succeeded'){
+        if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id)
-            
+
             const payment = {
                 email: user?.email,
                 transactionId: paymentIntent.id,
@@ -98,47 +97,45 @@ const CheckoutForm = () => {
             }
 
             axiosSecure.post('/payments', payment)
-            .then(res => {
-                if(res.data.paymentResult.insertedId){
+                .then(res => {
+                    if (res.data.paymentResult.insertedId) {
 
-                    classes.map(item => item._id === selectId && (item.seats - 1))
-
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Payment successful',
-                        icon: 'success',
-                        confirmButtonText: 'Cool'
-                    })
-                }
-            })
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Payment successful',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    }
+                })
 
         }
 
     }
     return (
-            <form onSubmit={handleSubmit}>
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#424770',
-                                '::placeholder': {
-                                    color: '#aab7c4',
-                                },
-                            },
-                            invalid: {
-                                color: '#9e2146',
+        <form onSubmit={handleSubmit}>
+            <CardElement
+                options={{
+                    style: {
+                        base: {
+                            fontSize: '16px',
+                            color: '#424770',
+                            '::placeholder': {
+                                color: '#aab7c4',
                             },
                         },
-                    }}
-                />
-                <button className="btn btn-outline text-white bg-rose-600 hover:bg-rose-400 border-0 px-10 text-lg mt-6" type="submit" disabled={!stripe || !clientSecret || processing}>
-                    Pay
-                </button>
-                <p className="text-red-600 mt-3">{error && `Error : ${error}`}</p>
-                <p className="text-green-600 mt-3">{transactionId && 'Transaction complete'}</p>
-            </form>
+                        invalid: {
+                            color: '#9e2146',
+                        },
+                    },
+                }}
+            />
+            <button className="btn btn-outline text-white bg-rose-600 hover:bg-rose-400 border-0 px-10 text-lg mt-6" type="submit" disabled={!stripe || !clientSecret || processing}>
+                Pay
+            </button>
+            <p className="text-red-600 mt-3">{error && `Error : ${error}`}</p>
+            <p className="text-green-600 mt-3">{transactionId && 'Transaction complete'}</p>
+        </form>
     );
 };
 

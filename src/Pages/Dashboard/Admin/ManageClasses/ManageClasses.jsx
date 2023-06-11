@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import ShowManageClass from "../../../../Map/ShowManageClass/ShowManageClass";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const ManageClasses = () => {
@@ -47,7 +48,11 @@ const ManageClasses = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
+        <div>
+            <Helmet>
+                <title>Martialverse || Dashboard || Manage Classes</title>
+            </Helmet>
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
             {
                 services.map(service => <ShowManageClass
                   key={service._id}
@@ -56,7 +61,9 @@ const ManageClasses = () => {
                   handleDeniedClasses={handleDeniedClasses}
                 ></ShowManageClass>)
             }
+        </div> 
         </div>
+        
     );
 };
 

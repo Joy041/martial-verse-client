@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import ShowUsers from "../../../../Map/ShowUsers/ShowUsers";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const ManageUser = () => {
@@ -49,7 +50,10 @@ const ManageUser = () => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Helmet>
+                <title>Martialverse || Dashboard || Manage User</title>
+            </Helmet>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 my-4">
                 {
                     users.map(user => <ShowUsers
                         key={user._id}

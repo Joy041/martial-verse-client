@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 // import ShowInstructorClass from "../../../../Map/ShowInstructorClass/ShowInstructorClass";
 import { useContext } from "react";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 
 const MyClass = () => {
@@ -18,37 +19,32 @@ const MyClass = () => {
         }
     })
 
+
     return (
         <div className="my-16">
+            <Helmet>
+                <title>Martialverse || Dashboard || My Class</title>
+            </Helmet>
             <div className="bg-sky-50 px-6 py-12">
-                <div className="mt-9">
-                    <div className="overflow-x-auto w-ful   ">
-                        <table className="table w-ful">
+                <div className="mt-">
+                    <div className="   ">
+                        <table className="table w-full">
                             <thead>
-                                <td className="flex justify-between">
-                                    <th className="font-bold text-base">IMAGE</th>
+                                <td className="flex justify-between items-center">
+                                    <th className="font-bold text-base">STATUS</th>
                                     <th className="font-bold text-base">CLASS NAME</th>
-                                    <th className="font-bold text-base">PRICE</th>
+                                    <th className="font-bold text-base">FEEDBACK</th>
+
                                 </td>
                             </thead>
                             <tbody>
                                 {
 
                                     services.map(service => <div key={service._id}>
-                                        {service.instructor_name === user.displayName && <tr className="flex justify-between">
-                                            <td>
-                                                <div className="flex items-center space-x-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle w-12 h-12">
-                                                            <img src={service.image} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {service.name}
-                                            </td>
-                                            <td><span className='text-orange-500'>${service.price}</span></td>
+                                        {service.instructor_name === user.displayName && <tr className="flex justify-start items-center">
+                                            <td>{service.status}</td>
+                                            <td className="ms-[550px]">{service.name}</td>
+                                            <td className="ms-[460px]">{service.feedback ? <a href="#" data-toggle="tooltip" title={service.feedback}>{(service.feedback).slice(0, 15)}</a> : ''}</td>
                                         </tr>}
                                     </div>)
                                 }

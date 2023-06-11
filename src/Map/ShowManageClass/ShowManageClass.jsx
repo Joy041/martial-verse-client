@@ -1,31 +1,30 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hook/useAxiosSecure";
-import useClasses from "../../hook/useClasses";
 
 
 const ShowManageClass = ({ service, handleDeniedClasses, handleApprovedClasses }) => {
     const [axiosSecure] = useAxiosSecure()
-    const [, refetch] = useClasses()
 
-    const { _id, image, name, instructor_name, seats, price, status } = service
+    const { _id, image, name, instructor_name, seats, price, status, feedback } = service
 
     const handleFeedbackForm = event => {
         event.preventDefault()
-        const feedback = event.target.feedback.value;
+        const form = event.target
+        const feedback = form.feedback.value;
         console.log(feedback)
 
-        axiosSecure.patch(`/services/feedback/${_id}`,  {feedback} )
+        axiosSecure.patch(`/services/feedback/${_id}`, { feedback })
             .then(res => {
-                if(res.data.modifiedCount){
-                    refetch()
+                if (res.data.modifiedCount) {
+                    form.reset()
                     Swal.fire({
-                    title: 'Success!',
-                    text: 'Successfully selected',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
+                        title: 'Success!',
+                        text: 'Feedback added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
                 }
-                
+
             })
 
     }
@@ -46,13 +45,15 @@ const ShowManageClass = ({ service, handleDeniedClasses, handleApprovedClasses }
                     {
                         status === 'denied' ? <>
                             <button disabled className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Denied</button>
-                            <div>
-                                <form onSubmit={handleFeedbackForm}>
-                                    <input className="w-72" name="feedback" type="text" placeholder="Feedback" />
-                                    {/* <button onClick={() => handleFeedback(_id)} className="btn bg-rose-600 hover:bg-rose-400">Post</button> */}
-                                    <input type="submit" className="btn bg-rose-600 hover:bg-rose-400 w-24" />
-                                </form>
-                            </div>
+                            {
+                                feedback ? '' : <div>
+                                    <form onSubmit={handleFeedbackForm}>
+                                        <input className="w-72" name="feedback" type="text" placeholder="Feedback" />
+                                        {/* <button onClick={() => handleFeedback(_id)} className="btn bg-rose-600 hover:bg-rose-400">Post</button> */}
+                                        <input type="submit" className="btn bg-rose-600 hover:bg-rose-400 w-24" />
+                                    </form>
+                                </div>
+                            }
                         </> : <button onClick={() => handleDeniedClasses(service)} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Denied</button>
                     }
                 </div>

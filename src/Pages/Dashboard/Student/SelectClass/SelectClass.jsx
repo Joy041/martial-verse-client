@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import useSelectedClass from "../../../../hook/useSelectedClass";
 import { Helmet } from "react-helmet-async";
 import ShowSelectClass from "../../../../Map/ShowSelectClass/ShowSelectClass";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const SelectClass = () => {
@@ -22,10 +22,10 @@ const SelectClass = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
-            if(result.isConfirmed){
-                 axiosSecure.delete(`/selected/${id}`)
-                 .then(res => {
-                    refetch()
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/selected/${id}`)
+                    .then(res => {
+                        refetch()
                         if (res.data.deletedCount > 0) {
                             Swal.fire(
                                 'Deleted!',
@@ -33,7 +33,7 @@ const SelectClass = () => {
                                 'success'
                             )
                         }
-                 })
+                    })
             }
         })
     }
@@ -42,7 +42,7 @@ const SelectClass = () => {
         <div>
             <div className=" max-w-screen-xl mx-auto">
                 <Helmet>
-                    <title>MARTIALverse || Dashboard || My Cart</title>
+                    <title>MARTIALverse || Dashboard || Select Class</title>
                 </Helmet>
                 <div className="my-16">
                     <div className="bg-sky-50 px-6 py-12">

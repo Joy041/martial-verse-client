@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const image_token = import.meta.env.VITE_IMAGE_SECRET_TOKEN;
 const AddClass = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm();
     const [axiosSecure] = useAxiosSecure()
     const img_url = `https://api.imgbb.com/1/upload?key=${image_token}`
@@ -22,33 +23,36 @@ const AddClass = () => {
             method: 'POST',
             body: formData
         })
-        .then(res => res.json())
-        .then(imgRes => {
-            console.log(imgRes)
-            if(imgRes.success){
-                const imgUrl = imgRes.data.display_url;
-                const {name, instructor, seats, price, email} = data;
-                const addItem = {name, price: parseFloat(price), instructor_name: instructor, seats: parseFloat(seats), email, image: imgUrl, status: 'pending'}
-                axiosSecure.post('/services', addItem)
-                .then(data => {
-                    console.log('after posting new menu item', data.data)
-                    if(data.data.insertedId){
-                        reset()
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Class added successfully',
-                            icon: 'success',
-                            confirmButtonText: 'Cool'
+            .then(res => res.json())
+            .then(imgRes => {
+                console.log(imgRes)
+                if (imgRes.success) {
+                    const imgUrl = imgRes.data.display_url;
+                    const { name, instructor, seats, price, email } = data;
+                    const addItem = { name, price: parseFloat(price), instructor_name: instructor, seats: parseFloat(seats), email, image: imgUrl, status: 'pending' }
+                    axiosSecure.post('/services', addItem)
+                        .then(data => {
+                            console.log('after posting new menu item', data.data)
+                            if (data.data.insertedId) {
+                                reset()
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Class added successfully',
+                                    icon: 'success',
+                                    confirmButtonText: 'Cool'
+                                })
+                            }
                         })
-                    }
-                })
-            }
-        })
+                }
+            })
 
     }
-  console.log(image_token)
+    console.log(image_token)
     return (
         <div>
+            <Helmet>
+                <title>Martialverse || Dashboard || Add Class</title>
+            </Helmet>
             <form className="max-w-screen-xl mx-auto bg-sky-50 p-14 my-16" onSubmit={handleSubmit(onSubmit)}>
                 <div className="md:flex gap-5">
                     <div className="form-control w-full ">

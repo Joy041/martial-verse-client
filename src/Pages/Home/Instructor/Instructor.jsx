@@ -73,7 +73,7 @@ const Instructor = () => {
                 className="mySwiper"
             >
                 {
-                    instructors.slice(0, 7).map(instructor => <>
+                    instructors.slice(0, 7).map(instructor => <div key={instructor._id}>
                         {
                             instructor.role === 'instructor' && <SwiperSlide
                                 key={instructor._id}
@@ -88,7 +88,7 @@ const Instructor = () => {
                                 </div>
                             </SwiperSlide>
                         }
-                    </>)
+                    </div>)
                 }
             </Swiper>
             <button onClick={toggleStyle} className="btn bg-rose-600 border-0 mt-20 mb-8 hover:bg-rose-400">Toggle Dark/Light</button>
