@@ -27,13 +27,14 @@ const MyClass = () => {
             </Helmet>
             <div className="bg-sky-50 px-6 py-12">
                 <div className="mt-">
-                    <div className="   ">
-                        <table className="table w-full">
+                    <div>
+                        <table className="table w-full max-w-lg mx-auto">
                             <thead>
                                 <td className="flex justify-between items-center">
-                                    <th className="font-bold text-base">STATUS</th>
-                                    <th className="font-bold text-base">CLASS NAME</th>
-                                    <th className="font-bold text-base">FEEDBACK</th>
+                                    <th className="font-bold text-base ">STATUS</th>
+                                    <th className="font-bold text-base ms-[250px]">CLASS NAME</th>
+                                    <th className="font-bold text-base ms-[250px]">FEEDBACK</th>
+                                    <th className="font-bold text-base ms-[290px]">ENROLLED</th>
 
                                 </td>
                             </thead>
@@ -41,11 +42,15 @@ const MyClass = () => {
                                 {
 
                                     services.map(service => <div key={service._id}>
-                                        {service.instructor_name === user.displayName && <tr className="flex justify-start items-center">
-                                            <td>{service.status}</td>
-                                            <td className="ms-[550px]">{service.name}</td>
-                                            <td className="ms-[460px]">{service.feedback ? <a href="#" data-toggle="tooltip" title={service.feedback}>{(service.feedback).slice(0, 15)}</a> : ''}</td>
-                                        </tr>}
+                                        {service.instructor_name === user.displayName && <>
+
+                                            <tr className="flex justify-between items-center">
+                                                <td>{service.status}</td>
+                                                <td className="ms-[190px]">{service.name}</td>
+                                                <td className="ms-[180px]">{service.feedback ? <a href="#" data-toggle="tooltip" title={service.feedback}>{(service.feedback).slice(0, 15)}</a> : ''}</td>
+                                                <td className="ms-[280px]">{service.booking}</td>
+                                            </tr>
+                                        </>}
                                     </div>)
                                 }
                             </tbody>

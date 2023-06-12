@@ -15,7 +15,7 @@ const ShowUsers = ({ user, handleMakeAdmin, handleMakeInstructor }) => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name}</h2>
                     <p>{email}</p>
-                    <p>{role === 'admin' && 'admin' || role === 'instructor' && 'instructor' || 'student' }</p>
+                    <p>{role === 'admin' && 'admin' || role === 'instructor' && 'instructor' || role === 'student' && 'student' }</p>
                     <div className="card-actions">
                         {
                             role === 'admin' ? <button disabled className="btn btn-outline block border-rose-600 text-rose-600">Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline block border-rose-600 text-rose-600">Admin</button>

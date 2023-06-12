@@ -29,7 +29,7 @@ const AddClass = () => {
                 if (imgRes.success) {
                     const imgUrl = imgRes.data.display_url;
                     const { name, instructor, seats, price, email } = data;
-                    const addItem = { name, price: parseFloat(price), instructor_name: instructor, seats: parseFloat(seats), email, image: imgUrl, status: 'pending' }
+                    const addItem = { name, price: parseFloat(price), instructor_name: instructor, seats: parseFloat(seats), email, image: imgUrl, status: 'pending', booking: 0 }
                     axiosSecure.post('/services', addItem)
                         .then(data => {
                             console.log('after posting new menu item', data.data)

@@ -1,26 +1,28 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
-import useSelectedClass from "../../../../hook/useSelectedClass";
+// import useSelectedClass from "../../../../hook/useSelectedClass";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
 import { AuthContext } from "../../../../Providers/AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import './CheckoutForm.css'
+import Swal from "sweetalert2";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements()
     const [error, setError] = useState('')
-    const [selectClass] = useSelectedClass()
-    const total = selectClass.reduce((sum, item) => item.price + sum, 0)
-    const price = parseFloat(total.toFixed(2))
+    // const [selectClass] = useSelectedClass()
+    // const total = selectClass.reduce((sum, item) => item.price + sum, 0)
+    // const price = parseFloat(total.toFixed(2))
     const [axiosSecure] = useAxiosSecure()
     const [clientSecret, setClientSecret] = useState('')
-    const { user } = useContext(AuthContext)
+    const { user, pricePay, payName, payId, payClassId, paySeat, payBooking } = useContext(AuthContext)
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
+    const price = pricePay;
 
     useEffect(() => {
-        console.log(price)
+        console.log(price, payName, payId, payClassId, paySeat, payBooking)
         if (price > 0) {
             axiosSecure.post('/create-payment', { price })
                 .then(res => {
@@ -28,10 +30,10 @@ const CheckoutForm = () => {
                     setClientSecret(res.data.clientSecret)
                 })
         }
-    }, [price, axiosSecure])
+    }, [axiosSecure, price, payClassId, payId, payBooking, paySeat, payName])
 
 
-    
+
 
 
     const handleSubmit = async (event) => {
@@ -84,19 +86,36 @@ const CheckoutForm = () => {
         setProcessing(false)
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id)
+             const seat = paySeat - 1;
+            const book = payBooking + 1;
 
-            const payment = {
+            console.log(paySeat, book, seat)
+
+            axiosSecure.patch(`/services/booking/${payClassId}`, {seat, book})
+                .then(res => {
+                    console.log(res.data)
+                })
+            
+
+            // const payment = {
+            //     email: user?.email,
+            //     transactionId: paymentIntent.id,
+            //     price,
+            //     date: new Date(),
+            //     className: payName,
+            //     selectItem: payId,
+            //     classItem: payClassId
+            // }
+
+            axiosSecure.post('/payments', {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
                 date: new Date(),
-                quantity: selectClass.length,
-                className: selectClass.map(item => item.name),
-                selectItem: selectClass.map(item => item._id),
-                classItem: selectClass.map(item => item.classId)
-            }
-
-            axiosSecure.post('/payments', payment)
+                className: payName,
+                selectItem: payId,
+                classItem: payClassId
+            })
                 .then(res => {
                     if (res.data.paymentResult.insertedId) {
 

@@ -13,6 +13,12 @@ const githubProvider = new GithubAuthProvider()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
+    const [pricePay, setPricePay] = useState(0)
+    const [payName, setPayName] = useState('')
+    const [payId, setPayId] = useState('')
+    const [payClassId, setPayClassId] = useState('')
+    const [paySeat, setPaySeat] = useState(0)
+    const [payBooking, setPayBooking] = useState(0)
 
     const signUp = (email, password) => {
         setLoading(true)
@@ -82,7 +88,19 @@ const AuthProvider = ({ children }) => {
         user,
         loading,
         googleLogin,
-        githubLogin
+        githubLogin, 
+        pricePay,
+        setPricePay,
+        payName,
+        setPayName,
+        payId,
+        setPayId,
+        payClassId,
+        setPayClassId,
+        paySeat,
+        setPaySeat,
+        payBooking,
+        setPayBooking
     }
 
     return (

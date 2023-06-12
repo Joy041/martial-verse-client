@@ -18,12 +18,12 @@ const Classes = () => {
     const [isAdmin] = useAdmin()
     const [isInstructor] = useInstructor()
 
-    const handleAddToSelectedSection = service => {
+    const handleAddToSelectedSection = (service) => {
 
-        const { _id, image, name, instructor_name, price, seats } = service
+        const { _id, image, name, instructor_name, price, seats, booking } = service
 
         if (user && user.email) {
-            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email, seats })
+            axiosSecure.post('/selected', { classId: _id, image, name, instructor_name, price, email: user.email, seats, booking })
                 .then(res => {
                     if (res.data.insertedId) {
                         refetch()
@@ -74,7 +74,7 @@ const Classes = () => {
                                     <p><span className="text-lg font-semibold">Available Seats :</span> {service.seats}</p>
                                     <p><span className="text-lg font-semibold">Price :</span> <span className="text-orange-600 font-bold">${service.price}</span></p>
                                     <div className="card-actions">
-                                        <button onClick={() => handleAddToSelectedSection(service)} disabled={isAdmin || isInstructor} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
+                                        <button onClick={() => handleAddToSelectedSection(service)} disabled={isAdmin || isInstructor || service.seats === 0 || !user} className="btn bg-rose-600 hover:bg-rose-400 mt-3 border-0 text-white font-bold px-8">Select</button>
                                     </div>
                                 </div>
                             </div>

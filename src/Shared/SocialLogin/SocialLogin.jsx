@@ -20,7 +20,7 @@ const SocialLogin = ({ setError }) => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
 
-                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL })
+                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL, role: 'student' })
                     .then(() => {
                         navigate(from, { replace: true })
                         Swal.fire({
@@ -39,7 +39,7 @@ const SocialLogin = ({ setError }) => {
             .then(result => {
                 const loggedUser = result.user;
 
-                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL })
+                axios.post('https://martial-verse-server-joy041.vercel.app/users', { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL, role: 'student' })
                 .then(() => {
                     navigate(from, { replace: true })
                     Swal.fire({

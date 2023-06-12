@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import ShowSelectClass from "../../../../Map/ShowSelectClass/ShowSelectClass";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hook/useAxiosSecure";
-import { Link } from "react-router-dom";
 
 
 const SelectClass = () => {
@@ -49,12 +48,10 @@ const SelectClass = () => {
                         <div className="flex justify-between">
                             <h1 className="text-2xl font-bold">Total Selected Class: {selectClass?.length} </h1>
                             <h1 className="text-2xl font-bold">Total Price: ${totalPrice} </h1>
-                            <Link to={'/dashboard/payment'}><button className="btn bg-[#D1A054] border-0 btn-sm">Pay</button></Link>
                         </div>
                         <div className="mt-9">
                             <div className="overflow-x-auto w-full">
                                 <table className="table w-full">
-                                    {/* head */}
                                     <thead>
                                         <tr>
                                             <th>#</th>

@@ -49,7 +49,6 @@ const ShowManageClass = ({ service, handleDeniedClasses, handleApprovedClasses }
                                 feedback ? '' : <div>
                                     <form onSubmit={handleFeedbackForm}>
                                         <input className="w-72" name="feedback" type="text" placeholder="Feedback" />
-                                        {/* <button onClick={() => handleFeedback(_id)} className="btn bg-rose-600 hover:bg-rose-400">Post</button> */}
                                         <input type="submit" className="btn bg-rose-600 hover:bg-rose-400 w-24" />
                                     </form>
                                 </div>

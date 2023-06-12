@@ -33,7 +33,7 @@ const EnrolledClasses = () => {
                                         <div>
                                             {
                                                 classes.map(item => <div key={item._id}>{
-                                                    ((payment.classItem).map(enroll => <div key={enroll._id}> {enroll === item._id && <tr className="flex justify-between items-center">
+                                                    payment.classItem === item._id && <tr className="flex justify-between items-center">
                                                         <td>
                                                             <div className="flex items-center space-x-3">
                                                                 <div className="avatar">
@@ -50,7 +50,7 @@ const EnrolledClasses = () => {
                                                             {item.instructor_name}
                                                         </td>
                                                         <td><span className='text-orange-500'>${item.price}</span></td>
-                                                    </tr>}</div>))
+                                                    </tr>
 
                                                 }</div>)
                                             }

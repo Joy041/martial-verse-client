@@ -2,7 +2,7 @@
 
 const ShowPaymentHistory = ({ item, index }) => {
 
-    const {transactionId, price, date, quantity, className} = item
+    const {transactionId, price, date, className} = item
 
     return (
         <tr>
@@ -17,7 +17,6 @@ const ShowPaymentHistory = ({ item, index }) => {
                 {date}
             </td>
             <td><span className='text-orange-500'>${price}</span></td>
-            <td>{quantity}</td>
         </tr>
     );
 };
